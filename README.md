@@ -15,12 +15,34 @@ The DFS (Distributed File System) project is a peer-to-peer file sharing system 
 1. Peer-to-peer file sharing and synchronization.
 2. REST API endpoints for file upload, download, and peer management.
 3. Distributed Hash Table (DHT) for file location tracking.
+4. TCP-based communication for peer-to-peer messaging.
+5. Efficient message serialization using `bincode`.
 
 ### Client UI
 1. File upload interface.
 2. File listing and download functionality.
 3. Peer management interface.
 4. Node uptime display.
+
+## Workflow Descriptions
+
+### Network Node Operations (DFS Engine)
+1. **Node Initialization**:
+   - Creates an empty `FileSystem`.
+   - Initializes an empty peer list.
+   - Sets up DHT and uptime counter.
+   - Starts a TCP listener for peer connections.
+2. **Peer Synchronization**:
+   - Requests peer file lists and exchanges missing files.
+   - Updates the DHT with new file locations.
+
+### File Operations
+1. **File Upload**:
+   - Splits files into chunks, hashes them, and distributes them across the network.
+2. **File Download**:
+   - Retrieves file chunks from peers and reassembles them.
+3. **File Deletion**:
+   - Removes file metadata and notifies peers.
 
 ## Next Steps
 
@@ -54,37 +76,3 @@ The DFS (Distributed File System) project is a peer-to-peer file sharing system 
 1. Navigate to the `dfs-engine/` directory:
    ```bash
    cd dfs-engine
-   ```
-2. Build and run the backend:
-   ```bash
-   cargo run
-   ```
-   The backend will start and listen for incoming connections.
-
-#### Client UI
-1. Navigate to the `client-ui/` directory:
-   ```bash
-   cd client-ui
-   ```
-2. Install dependencies:
-   ```bash
-   npm install
-   ```
-3. Start the development server:
-   ```bash
-   npm start
-   ```
-   The application will be accessible at `http://localhost:3000`.
-
-### Configuration
-- Update the backend API URL in the `config.js` or `.env` file in `client-ui/` to point to your DFS Engine instance.
-
-## Contributing
-- Fork the repository and create a new branch for your feature or bug fix.
-- Submit a pull request with detailed information about your changes.
-
-## Feedback
-Feel free to submit issues or feature requests in the repository's issue tracker.
-
----
-This README outlines the structure and development goals for the DFS project. With the planned updates to WebSockets and error management, the project will offer a more robust and seamless user experience. Happy coding!
