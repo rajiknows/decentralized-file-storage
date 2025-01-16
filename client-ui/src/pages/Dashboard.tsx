@@ -2,7 +2,7 @@ import axios from "axios";
 import { useState, useEffect } from "react";
 import AddNodeModal from "./AddNode";
 
-const backendUrl = "http://localhost:3000/api/v1";
+const backendUrl = "http://localhost:3000";
 
 const Dashboard = () => {
     const [peers, setPeers] = useState([]);
@@ -16,17 +16,26 @@ const Dashboard = () => {
         setError("");
         try {
             const response = await axios.get(`${backendUrl}/peers`);
-            setPeers(response.data.peers || []); // Use an empty array as fallback
+            setPeers(response.data || []); // Remove .peers since the response is already an array
         } catch (err) {
-            //@ts-ignore
             setError(err.message || "An error occurred while fetching peers.");
         } finally {
             setLoading(false);
         }
     };
 
+    async function connectDfsEngine() {
+        try {
+            const response = await axios.get(`${backendUrl}/connect`);
+            console.log(response.data);
+        } catch (err) {
+            console.error(err);
+        }
+    }
+
     // Fetch peers on component load
     useEffect(() => {
+        connectDfsEngine();
         fetchPeers();
     }, []);
 

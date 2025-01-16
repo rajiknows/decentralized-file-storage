@@ -6,7 +6,7 @@ const AddNodeModal = ({ closeModal }: any) => {
 
     const handleAddNode = async () => {
         try {
-            const response = await axios.post("http://localhost:3000/peers/", {
+            const response = await axios.post("http://localhost:3000/peers", {
                 addr: peerAddr,
             });
             if (response.status === 200) {
