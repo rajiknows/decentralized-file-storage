@@ -73,6 +73,7 @@ The DFS (Distributed File System) project is a peer-to-peer file sharing system 
 
 ### Setup
 #### DFS Engine
-1. Navigate to the `dfs-engine/` directory:
+1. Navigate to the `dfs/` directory:
    ```bash
-   cd dfs-engine
+   cd dfs/
+   ./run.sh
